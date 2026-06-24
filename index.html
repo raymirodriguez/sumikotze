@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<script>document.documentElement.classList.add('js');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sumi Kotze — The Woman Returning to Herself</title>
+<meta name="description" content="Emotional self-leadership for women in transition. Clarity, strength, and softness. You don't need to be fixed. You need to come home to yourself." />
+
+<!-- Social preview (update URLs once live) -->
+<meta property="og:title" content="Sumi Kotze — The Woman Returning to Herself" />
+<meta property="og:description" content="Emotional self-leadership for women in transition." />
+<meta property="og:type" content="website" />
+
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+<!-- Fonts: Cormorant Garamond (editorial serif) + Jost (geometric utility sans) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<style>
+  /* ============================================================
+     SUMI KOTZE — Brand tokens
+     Palette from the brand kit (+ two derived support tones).
+     ============================================================ */
+  :root {
+    --beige:    #EFE7DC;  /* Warm beige  — primary background     */
+    --cream:    #F7F2EA;  /* derived     — lighter layering panel  */
+    --blush:    #EBD4CC;  /* Soft blush                            */
+    --dusty:    #C9A097;  /* Dusty blush — accent / links / CTA    */
+    --dusty-dk: #B0846F;  /* derived     — hover state             */
+    --mocha:    #5E463F;  /* derived     — deep warm band          */
+    --charcoal: #2A2A2E;  /* Charcoal    — text / dark sections    */
+    --ink:      #1E1E22;  /* derived     — footer                  */
+
+    --text:        #2A2A2E;
+    --text-soft:   rgba(42, 42, 46, 0.66);
+    --text-on-dark:      #F3ECE3;
+    --text-on-dark-soft: rgba(243, 236, 227, 0.62);
+    --line: rgba(42, 42, 46, 0.14);
+
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans:  "Jost", "Helvetica Neue", Arial, sans-serif;
+
+    --maxw: 1180px;
+    --gutter: clamp(1.25rem, 5vw, 4rem);
+    --section-y: clamp(4.5rem, 10vw, 9rem);
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--beige);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* ---------- Type primitives ---------- */
+  .eyebrow {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--dusty);
+  }
+  .eyebrow.on-dark { color: var(--dusty); }
+
+  h1, h2, h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    line-height: 1.08;
+    margin: 0;
+    letter-spacing: 0.005em;
+  }
+  .display { font-size: clamp(2.6rem, 6.2vw, 5rem); }
+  .h2      { font-size: clamp(2rem, 4.4vw, 3.4rem); }
+  .h3      { font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
+
+  .lead {
+    font-size: 1.1rem;
+    color: var(--text-soft);
+    max-width: 46ch;
+  }
+  .accent { color: var(--dusty); }
+  em.soft { font-style: italic; color: var(--dusty); }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.95em 1.8em;
+    border-radius: 999px;
+    transition: background 0.3s var(--ease), color 0.3s var(--ease),
+                border-color 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+  .btn-primary {
+    background: var(--dusty);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--dusty-dk); transform: translateY(-2px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--line);
+  }
+  .btn-ghost:hover { border-color: var(--charcoal); transform: translateY(-2px); }
+
+  .btn-ghost.on-dark { color: var(--text-on-dark); border-color: rgba(243,236,227,0.28); }
+  .btn-ghost.on-dark:hover { border-color: var(--text-on-dark); }
+
+  /* ============================================================
+     NAV
+     ============================================================ */
+  header.nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease), padding 0.4s var(--ease);
+    padding-block: 1.4rem;
+  }
+  header.nav.scrolled {
+    background: rgba(239, 231, 220, 0.86);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 0 var(--line);
+    padding-block: 0.85rem;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .nav-logo img { height: 34px; width: auto; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.2rem, 2.6vw, 2.6rem);
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .nav-links a {
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text);
+    opacity: 0.78;
+    transition: opacity 0.25s var(--ease);
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { display: inline-block; }
+
+  .nav-toggle {
+    display: none;
+    background: none; border: 0; cursor: pointer;
+    width: 30px; height: 22px; position: relative;
+  }
+  .nav-toggle span {
+    position: absolute; left: 0; right: 0; height: 1.5px;
+    background: var(--charcoal); transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  }
+  .nav-toggle span:nth-child(1){ top: 2px; }
+  .nav-toggle span:nth-child(2){ top: 10px; }
+  .nav-toggle span:nth-child(3){ top: 18px; }
+  body.menu-open .nav-toggle span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+  body.menu-open .nav-toggle span:nth-child(2){ opacity: 0; }
+  body.menu-open .nav-toggle span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-top: 6rem;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+    width: 100%;
+  }
+  .hero-eyebrow { margin-bottom: 1.6rem; }
+  .hero h1 { margin-bottom: 1.8rem; }
+
+  /* Hand-drawn underline beneath the final word, echoing the signature line */
+  .underliner { position: relative; white-space: nowrap; }
+  .underliner svg {
+    position: absolute;
+    left: 0; right: 0; bottom: -0.18em;
+    width: 100%; height: 0.4em;
+    overflow: visible;
+  }
+  .underliner path {
+    fill: none; stroke: var(--dusty); stroke-width: 3.5; stroke-linecap: round;
+    stroke-dasharray: 480; stroke-dashoffset: 480;
+    animation: draw 1.5s var(--ease) 0.7s forwards;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 2.4rem; }
+  .hero-sig {
+    margin-top: 3rem;
+    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  /* Hero visual — refined placeholder panel. Swap .hero-photo bg for a portrait. */
+  .hero-photo {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 4px;
+    overflow: hidden;
+    background:
+      linear-gradient(160deg, rgba(94,70,63,0.0) 30%, rgba(94,70,63,0.35) 100%),
+      linear-gradient(150deg, var(--blush), var(--dusty) 65%, var(--mocha));
+    box-shadow: 0 30px 60px -30px rgba(42,42,46,0.4);
+  }
+  .hero-photo::after {
+    content: "PORTRAIT";
+    position: absolute; left: 1.4rem; bottom: 1.2rem;
+    font-size: 0.6rem; letter-spacing: 0.3em; color: rgba(255,255,255,0.7);
+  }
+  .hero-photo .photo-mark {
+    position: absolute; inset: auto 1.4rem 2.6rem auto;
+    width: 130px; opacity: 0.5;
+  }
+
+  /* ============================================================
+     INTRO / FOR-WHOM
+     ============================================================ */
+  .section { padding-block: var(--section-y); }
+
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+  }
+  .intro-grid .h2 { max-width: 14ch; }
+  .intro-body p { color: var(--text-soft); margin: 0 0 1.2rem; max-width: 56ch; }
+  .intro-body p:last-child { margin-bottom: 0; }
+  .intro-body .signoff {
+    font-family: var(--serif); font-style: italic; font-size: 1.5rem;
+    color: var(--charcoal); margin-top: 1.6rem;
+  }
+
+  /* ============================================================
+     FRAMEWORK (dark) — a real four-step sequence
+     ============================================================ */
+  .framework {
+    background: var(--charcoal);
+    color: var(--text-on-dark);
+  }
+  .framework .eyebrow { color: var(--dusty); }
+  .fw-head {
+    display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between;
+    gap: 1.5rem; margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .fw-head h2 { color: var(--text-on-dark); max-width: 16ch; }
+  .fw-head p { color: var(--text-on-dark-soft); max-width: 34ch; margin: 0; }
+
+  .fw-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .fw-step {
+    position: relative;
+    padding: 0 1.6rem;
+  }
+  .fw-step:not(:last-child)::after {
+    content: ""; position: absolute; top: 26px; right: 0;
+    width: 1px; height: calc(100% - 26px);
+    background: rgba(243,236,227,0.14);
+  }
+  .fw-num {
+    font-family: var(--sans); font-weight: 300; font-size: 0.7rem;
+    letter-spacing: 0.2em; color: var(--dusty); margin-bottom: 1.4rem;
+  }
+  .fw-icon {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: grid; place-items: center; margin-bottom: 1.4rem;
+    border: 1px solid rgba(243,236,227,0.22);
+  }
+  .fw-icon svg { width: 22px; height: 22px; stroke: var(--blush); fill: none; stroke-width: 1.4; }
+  .fw-step h3 { color: var(--text-on-dark); font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .fw-step .fw-sub {
+    font-size: 0.78rem; letter-spacing: 0.04em;
+    color: var(--text-on-dark-soft); line-height: 1.6;
+  }
+
+  /* ============================================================
+     MANTRA band (blush)
+     ============================================================ */
+  .mantra {
+    background: var(--blush);
+    text-align: center;
+  }
+  .mantra blockquote {
+    margin: 0 auto; max-width: 22ch;
+    font-family: var(--serif); font-weight: 500;
+    font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.18;
+    color: var(--charcoal);
+  }
+  .mantra .attrib {
+    margin-top: 2rem; font-size: 0.66rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: rgba(42,42,46,0.5);
+  }
+
+  /* ============================================================
+     WORK WITH ME — offerings
+     ============================================================ */
+  .offer-head { max-width: 30ch; margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
+  .offer-head h2 { margin-block: 0.8rem 1rem; }
+  .offer-head p { color: var(--text-soft); margin: 0; }
+
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .offer-card {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: clamp(1.6rem, 3vw, 2.4rem);
+    display: flex; flex-direction: column;
+    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  }
+  .offer-card:hover { transform: translateY(-4px); box-shadow: 0 24px 40px -28px rgba(42,42,46,0.45); }
+  .offer-card .num {
+    font-size: 0.7rem; letter-spacing: 0.2em; color: var(--dusty); margin-bottom: 1.6rem;
+  }
+  .offer-card h3 { font-size: 1.7rem; margin-bottom: 0.7rem; }
+  .offer-card p { color: var(--text-soft); font-size: 0.95rem; margin: 0 0 1.6rem; flex: 1; }
+  .offer-card .more {
+    font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    text-decoration: none; color: var(--charcoal);
+    display: inline-flex; align-items: center; gap: 0.5em;
+  }
+  .offer-card .more span { transition: transform 0.3s var(--ease); }
+  .offer-card:hover .more span { transform: translateX(4px); }
+
+  /* ============================================================
+     TESTIMONIALS
+     ============================================================ */
+  .testi { background: var(--cream); }
+  .testi-head { text-align: center; margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .testi-card {
+    background: var(--beige);
+    border-radius: 6px;
+    padding: clamp(1.6rem, 3vw, 2.2rem);
+  }
+  .testi-card .quote {
+    font-family: var(--serif); font-size: 1.35rem; line-height: 1.4;
+    color: var(--charcoal); margin: 0 0 1.4rem;
+  }
+  .testi-card .who { font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dusty); }
+  .placeholder-note {
+    text-align: center; margin-top: 2rem;
+    font-size: 0.78rem; color: var(--text-soft);
+  }
+
+  /* ============================================================
+     CLOSING CTA + CONTACT (dark)
+     ============================================================ */
+  .closing {
+    background: var(--ink);
+    color: var(--text-on-dark);
+    text-align: center;
+  }
+  .closing h2 { color: var(--text-on-dark); font-size: clamp(2.2rem, 5vw, 3.8rem); max-width: 18ch; margin-inline: auto; }
+  .closing .sub { color: var(--text-on-dark-soft); margin: 1.4rem auto 2.6rem; max-width: 42ch; }
+
+  .contact-form {
+    max-width: 540px; margin: 0 auto; text-align: left;
+    display: grid; gap: 1rem;
+  }
+  .field label {
+    display: block; font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-on-dark-soft); margin-bottom: 0.5rem;
+  }
+  .field input, .field textarea {
+    width: 100%; background: transparent;
+    border: 1px solid rgba(243,236,227,0.22); border-radius: 4px;
+    padding: 0.85rem 1rem; color: var(--text-on-dark);
+    font-family: var(--sans); font-size: 0.95rem; font-weight: 300;
+    transition: border-color 0.25s var(--ease);
+  }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--dusty); }
+  .field textarea { resize: vertical; min-height: 110px; }
+  .contact-form .btn-primary { justify-self: start; border: 0; cursor: pointer; margin-top: 0.4rem; }
+  .hp { position: absolute; left: -9999px; }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer.site {
+    background: var(--ink);
+    color: var(--text-on-dark-soft);
+    border-top: 1px solid rgba(243,236,227,0.1);
+    padding-block: 3.4rem;
+  }
+  .foot-inner {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 1.6rem;
+  }
+  .foot-logo img { height: 40px; width: auto; opacity: 0.92; }
+  .foot-links { display: flex; gap: 1.6rem; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
+  .foot-links a {
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; color: var(--text-on-dark-soft);
+    transition: color 0.25s var(--ease);
+  }
+  .foot-links a:hover { color: var(--text-on-dark); }
+  .foot-bottom {
+    margin-top: 2.4rem; padding-top: 1.6rem; border-top: 1px solid rgba(243,236,227,0.1);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem;
+    font-size: 0.7rem; letter-spacing: 0.06em;
+  }
+
+  /* ============================================================
+     SCROLL REVEAL
+     ============================================================ */
+  .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-photo { display: none; }
+    .intro-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .fw-steps { grid-template-columns: repeat(2, 1fr); gap: 2.4rem 0; }
+    .fw-step:nth-child(2)::after { display: none; }
+    .offer-grid, .testi-grid { grid-template-columns: 1fr; }
+
+    .nav-links {
+      position: fixed; inset: 0 0 0 auto; width: min(78vw, 320px);
+      flex-direction: column; align-items: flex-start; justify-content: center;
+      gap: 1.6rem; padding: 2rem 2.2rem;
+      background: var(--charcoal);
+      transform: translateX(100%); transition: transform 0.4s var(--ease);
+    }
+    .nav-links a { color: var(--text-on-dark); opacity: 0.85; font-size: 0.95rem; }
+    body.menu-open .nav-links { transform: none; }
+    .nav-toggle { display: block; z-index: 110; }
+    .nav-cta { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .underliner path { animation: none; stroke-dashoffset: 0; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =========================== NAV =========================== -->
+<header class="nav" id="top">
+  <div class="wrap nav-inner">
+    <a class="nav-logo" href="#top" aria-label="Sumi Kotze home">
+      <img src="assets/logo-dark.svg" alt="Sumi Kotze" />
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#framework">The Framework</a></li>
+        <li><a href="#work">Work With Me</a></li>
+        <li><a href="#journal">Journal</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li class="nav-cta"><a class="btn btn-primary" href="#contact">Work With Me</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- =========================== HERO =========================== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow hero-eyebrow">Emotional self-leadership for women in transition</p>
+      <h1 class="display">
+        You don't need to be fixed.<br />
+        You need to come home to
+        <span class="underliner">
+          <em class="soft">yourself.</em>
+          <svg viewBox="0 0 320 20" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M4 13 C 70 4, 150 4, 220 9 C 270 12, 300 11, 316 7" />
+          </svg>
+        </span>
+      </h1>
+      <p class="lead">Clarity, strength, and softness for the season you are walking through. This is the work of returning to who you already are.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#work">Work With Me</a>
+        <a class="btn btn-ghost" href="#framework">See the Framework</a>
+      </div>
+      <p class="hero-sig">The woman returning to herself</p>
+    </div>
+
+    <div class="hero-photo" aria-hidden="true">
+      <img class="photo-mark" src="assets/logo-light.svg" alt="" />
+    </div>
+  </div>
+</section>
+
+<!-- =========================== INTRO / ABOUT =========================== -->
+<section class="section" id="about">
+  <div class="wrap intro-grid reveal">
+    <div>
+      <p class="eyebrow">A brand for women in transition</p>
+      <h2 class="h2">A space to return to yourself.</h2>
+    </div>
+    <div class="intro-body">
+      <p>Most of us are not looking to be fixed. We are looking for a way back to the steadiness that was always ours, underneath the noise of a life in motion.</p>
+      <p>Sumi Kotze works with women moving through change: the end of something, the start of something, the in-between that asks more of you than you expected. The work is emotional self-leadership. Seeing clearly, staying grounded, and responding to your life with choice instead of reaction.</p>
+      <p>Strong mind. Soft heart. Unshakable you.</p>
+      <p class="signoff">Return to you. That's where everything changes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== FRAMEWORK =========================== -->
+<section class="framework section" id="framework">
+  <div class="wrap">
+    <div class="fw-head reveal">
+      <div>
+        <p class="eyebrow">The Framework</p>
+        <h2 class="h2">Four movements, one return.</h2>
+      </div>
+      <p>Emotional stability isn't luck. It's a skill, and it's built in order. Each step makes the next one possible.</p>
+    </div>
+
+    <div class="fw-steps reveal">
+      <div class="fw-step">
+        <div class="fw-num">01</div>
+        <div class="fw-icon">
+          <!-- eye -->
+          <svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Awareness</h3>
+        <p class="fw-sub">See clearly. Notice what is happening before you react to it.</p>
+      </div>
+      <div class="fw-step">
+        <div class="fw-num">02</div>
+        <div class="fw-icon">
+          <!-- heart -->
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-5-9.5-9C1 9 2.5 5.5 6 5.5c2 0 3 1.2 4 2.5 1-1.3 2-2.5 4-2.5 3.5 0 5 3.5 3.5 6.5-2 4-9.5 9-9.5 9z"/></svg>
+        </div>
+        <h3>Regulation</h3>
+        <p class="fw-sub">Stay grounded. High emotions reduce clarity. Regulate first.</p>
+      </div>
+      <div class="fw-step">
+        <div class="fw-num">03</div>
+        <div class="fw-icon">
+          <!-- leaf -->
+          <svg viewBox="0 0 24 24"><path d="M12 3c5 2 7 6 7 10 0 4-3 7-7 8-4-1-7-4-7-8 0-4 2-8 7-10z"/><path d="M12 4v16"/></svg>
+        </div>
+        <h3>Perspective</h3>
+        <p class="fw-sub">Detach with love. Understand without absorbing what isn't yours.</p>
+      </div>
+      <div class="fw-step">
+        <div class="fw-num">04</div>
+        <div class="fw-icon">
+          <!-- spark -->
+          <svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/></svg>
+        </div>
+        <h3>Leadership</h3>
+        <p class="fw-sub">Respond with choice. Lead your inner life instead of being led by it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== MANTRA =========================== -->
+<section class="mantra section">
+  <div class="wrap reveal">
+    <blockquote>You are allowed to choose your peace.</blockquote>
+    <p class="attrib">The woman returning to herself</p>
+  </div>
+</section>
+
+<!-- =========================== WORK WITH ME =========================== -->
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="offer-head reveal">
+      <p class="eyebrow">Work With Me</p>
+      <h2 class="h2">Ways we can do this together.</h2>
+      <p>Placeholder offerings below. Swap in real programs, pricing, and links as they firm up.</p>
+    </div>
+
+    <div class="offer-grid reveal">
+      <article class="offer-card">
+        <div class="num">01</div>
+        <h3>1:1 Coaching</h3>
+        <p>Private work for the woman in the middle of a real transition. Build the skills of regulation, perspective, and self-leadership at your own pace.</p>
+        <a class="more" href="#contact">Enquire <span>&rarr;</span></a>
+      </article>
+      <article class="offer-card">
+        <div class="num">02</div>
+        <h3>Resources</h3>
+        <p>Guides, practices, and tools you can return to on your own. Designed for the days you need grounding without a session.</p>
+        <a class="more" href="#contact">Explore <span>&rarr;</span></a>
+      </article>
+      <article class="offer-card">
+        <div class="num">03</div>
+        <h3>The Journal</h3>
+        <p>Short reflections on clarity, boundaries, and coming home to yourself. A quiet, ongoing companion to the work.</p>
+        <a class="more" href="#journal">Read <span>&rarr;</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== TESTIMONIALS =========================== -->
+<section class="testi section" id="journal">
+  <div class="wrap">
+    <div class="testi-head reveal">
+      <p class="eyebrow">Client Wins</p>
+      <h2 class="h2">In their words.</h2>
+    </div>
+
+    <div class="testi-grid reveal">
+      <figure class="testi-card">
+        <p class="quote">&ldquo;Replace with a real client testimonial. This card holds two to four sentences comfortably.&rdquo;</p>
+        <figcaption class="who">Client name, context</figcaption>
+      </figure>
+      <figure class="testi-card">
+        <p class="quote">&ldquo;Replace with a real client testimonial. Keep the strongest line first so it reads well even when skimmed.&rdquo;</p>
+        <figcaption class="who">Client name, context</figcaption>
+      </figure>
+      <figure class="testi-card">
+        <p class="quote">&ldquo;Replace with a real client testimonial. Short and specific lands harder than long and general.&rdquo;</p>
+        <figcaption class="who">Client name, context</figcaption>
+      </figure>
+    </div>
+    <p class="placeholder-note">Your testimonial screenshots are ready to transcribe into these cards.</p>
+  </div>
+</section>
+
+<!-- =========================== CLOSING + CONTACT =========================== -->
+<section class="closing section" id="contact">
+  <div class="wrap reveal">
+    <p class="eyebrow on-dark">Begin</p>
+    <h2 class="h2">Return to you. That's where everything changes.</h2>
+    <p class="sub">Tell me where you are in your transition. I read every message personally and will reply within a few days.</p>
+
+    <!-- Netlify-ready form. On deploy, Netlify auto-detects this and stores submissions. -->
+    <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact" />
+      <p class="hp"><label>Don't fill this out: <input name="bot-field" /></label></p>
+      <div class="field">
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" required />
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required />
+      </div>
+      <div class="field">
+        <label for="message">What are you moving through?</label>
+        <textarea id="message" name="message"></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- =========================== FOOTER =========================== -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-inner">
+      <a class="foot-logo" href="#top" aria-label="Sumi Kotze home">
+        <img src="assets/logo-light.svg" alt="Sumi Kotze" />
+      </a>
+      <ul class="foot-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#framework">The Framework</a></li>
+        <li><a href="#work">Work With Me</a></li>
+        <li><a href="#journal">Journal</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="foot-bottom">
+      <span>The woman returning to herself</span>
+      <span>&copy; <span id="year"></span> Sumi Kotze. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Nav: shrink on scroll
+  const nav = document.querySelector('header.nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile menu
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = document.body.classList.toggle('menu-open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.addEventListener('click', e => {
+    if (e.target.tagName === 'A') {
+      document.body.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded', false);
+    }
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
