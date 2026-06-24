@@ -389,15 +389,20 @@
     border-radius: 6px;
     padding: clamp(1.6rem, 3vw, 2.2rem);
   }
+  .js .testi-card.hidden { display: none; }
+  @keyframes testitFadeIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .testi-card.revealing { animation: testitFadeIn 0.55s var(--ease) both; }
+  .testi-stars { color: var(--dusty); margin: 0 0 0.8rem; font-size: 0.9rem; letter-spacing: 0.06em; }
   .testi-card .quote {
     font-family: var(--serif); font-size: 1.35rem; line-height: 1.4;
     color: var(--charcoal); margin: 0 0 1.4rem;
   }
   .testi-card .who { font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dusty); }
-  .placeholder-note {
-    text-align: center; margin-top: 2rem;
-    font-size: 0.78rem; color: var(--text-soft);
-  }
+  .load-more-wrap { text-align: center; margin-top: 2.8rem; display: none; }
+  .js .load-more-wrap { display: block; }
 
   /* ============================================================
      CLOSING CTA + CONTACT (dark)
@@ -664,21 +669,66 @@
       <h2 class="h2">In their words.</h2>
     </div>
 
-    <div class="testi-grid reveal">
+    <div class="testi-grid reveal" id="testiGrid">
+
+      <!-- Batch 1 — visible by default -->
       <figure class="testi-card">
-        <p class="quote">&ldquo;Replace with a real client testimonial. This card holds two to four sentences comfortably.&rdquo;</p>
-        <figcaption class="who">Client name, context</figcaption>
+        <p class="testi-stars">★★★★★</p>
+        <p class="quote">&ldquo;Sumi is an awesome coach! She truly cares about helping her clients and even went so far as to give me additional coaching sessions &mdash; and consistently goes beyond the time for each session to make sure I get what I need. Thank you so much Sumi!&rdquo;</p>
+        <figcaption class="who">Rhami Ax &mdash; Trustpilot</figcaption>
       </figure>
+
       <figure class="testi-card">
-        <p class="quote">&ldquo;Replace with a real client testimonial. Keep the strongest line first so it reads well even when skimmed.&rdquo;</p>
-        <figcaption class="who">Client name, context</figcaption>
+        <p class="quote">&ldquo;When my partner and I came to Sumi, this was our final attempt at a relationship. Sumi had been the safe container we needed. The structure of her program gave us more progress in 6 weeks than I had seen in 3 years. Truly grateful &mdash; it has changed the course of our relationship so much.&rdquo;</p>
+        <figcaption class="who">Katherine Talley</figcaption>
       </figure>
+
       <figure class="testi-card">
-        <p class="quote">&ldquo;Replace with a real client testimonial. Short and specific lands harder than long and general.&rdquo;</p>
-        <figcaption class="who">Client name, context</figcaption>
+        <p class="quote">&ldquo;Working with Sumi was invaluable for us during a complex time in our relationship. She provided us with useful tools and relatable resources to support us. She was healing, thoughtful, straightforward and kind. We can&rsquo;t wait to work with her again.&rdquo;</p>
+        <figcaption class="who">Alexis Garrison</figcaption>
       </figure>
+
+      <!-- Batch 2 — revealed on first Load More -->
+      <figure class="testi-card">
+        <p class="testi-stars">★★★★★</p>
+        <p class="quote">&ldquo;I&rsquo;ve worked with Sumi for a while now and she is excellent. I love her practical advice and exercises. They really get you to dig deep and unravel any blocks. It really helped me to understand what is important to me and how I see myself.&rdquo;</p>
+        <figcaption class="who">Stacey Kelly &mdash; Facebook</figcaption>
+      </figure>
+
+      <figure class="testi-card">
+        <p class="testi-stars">★★★★★</p>
+        <p class="quote">&ldquo;With my coach Sumi, I feel completely at ease and respected. I can be vulnerable without fearing judgment, which helps me overcome the shame I felt about not being able to organise myself for simple things. Thanks to Sumi&rsquo;s program, I&rsquo;m amazed at everything I&rsquo;ve accomplished and how far I&rsquo;ve come.&rdquo;</p>
+        <figcaption class="who">H&eacute;l&egrave;ne Chartrand &mdash; Trustpilot</figcaption>
+      </figure>
+
+      <figure class="testi-card">
+        <p class="quote">&ldquo;I want to thank you for your time and patience in working with me over the past few months. You&rsquo;ve helped me to recognise lies I have told myself that limited my ability to achieve what I know I&rsquo;m capable of. With the self-assessments, homework, and timeline therapy I already feel more competent and comfortable with myself.&rdquo;</p>
+        <figcaption class="who">Beth</figcaption>
+      </figure>
+
+      <!-- Batch 3 — revealed on second Load More -->
+      <figure class="testi-card">
+        <p class="testi-stars">★★★★★</p>
+        <p class="quote">&ldquo;I had my first session with Sumi a few nights ago. I was lost. Sumi helped me see things clearer and really helped me find my balance. She lifted the mountain off my chest. Thank you so much, Sumi. I&rsquo;m looking forward to having another session with you.&rdquo;</p>
+        <figcaption class="who">Alice Conversi &mdash; Google</figcaption>
+      </figure>
+
+      <figure class="testi-card">
+        <p class="quote">&ldquo;You give insights that I can use later to assess my feelings through an unfiltered lens. You&rsquo;ve helped me practice establishing and standing firm on my boundaries, and I feel so much better as a result of putting this into practice. Thank you for improving my life in a long-lasting way.&rdquo;</p>
+        <figcaption class="who">Beth</figcaption>
+      </figure>
+
+      <figure class="testi-card">
+        <p class="testi-stars">★★★★★</p>
+        <p class="quote">&ldquo;Had such an amazing Timeline Therapy session with Sumi where I got to connect to a memory of me in my mother&rsquo;s womb. I felt everything she felt. This was very eye opening as a mother and in general how energy and emotion is transferred.&rdquo;</p>
+        <figcaption class="who">Katherine Talley &mdash; Trustpilot</figcaption>
+      </figure>
+
     </div>
-    <p class="placeholder-note">Your testimonial screenshots are ready to transcribe into these cards.</p>
+
+    <div class="load-more-wrap">
+      <button class="btn btn-ghost" id="loadMoreBtn">Load more</button>
+    </div>
   </div>
 </section>
 
@@ -761,6 +811,34 @@
     entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
   }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Testimonials — load more (3 at a time)
+  const BATCH = 3;
+  let shown = BATCH;
+  const cards = Array.from(document.querySelectorAll('#testiGrid .testi-card'));
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  const loadMoreWrap = loadMoreBtn ? loadMoreBtn.closest('.load-more-wrap') : null;
+
+  cards.forEach((c, i) => { if (i >= BATCH) c.classList.add('hidden'); });
+
+  if (loadMoreBtn) {
+    if (cards.length <= BATCH) loadMoreWrap.style.display = 'none';
+
+    loadMoreBtn.addEventListener('click', () => {
+      const next = cards.slice(shown, shown + BATCH);
+      next.forEach((c, i) => {
+        c.classList.remove('hidden');
+        c.style.animationDelay = `${i * 0.1}s`;
+        c.classList.add('revealing');
+        c.addEventListener('animationend', () => {
+          c.classList.remove('revealing');
+          c.style.animationDelay = '';
+        }, { once: true });
+      });
+      shown += BATCH;
+      if (shown >= cards.length) loadMoreWrap.style.display = 'none';
+    });
+  }
 </script>
 </body>
 </html>
